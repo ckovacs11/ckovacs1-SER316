@@ -79,9 +79,9 @@ public class Cart {
     }
 
     // Gets the tax based on state and the total
-    public double getTax(double totalBT, String twoLetterUSStateAbbreviation) {
+    public double getTax(double totalBT, String state) {
         double newTotal = 0;
-        switch (twoLetterUSStateAbbreviation) {
+        switch (state) {
             case "AZ":
                 newTotal = totalBT * .08;
                 break;
