@@ -15,4 +15,4 @@ ID#5, Location: Cart.java line 9, line 10. Problem Desc: All class attributes sh
 
 ID#6, Location: Cart.java line 81. Problem Desc: Parameter name is too long. Problem type: CS10/LOW
 
-ID#7, Location: Cart.java line 50. Problem Desc: the class comparison is not working with the current implementation. Problem type: FD/BR
+ID#7, Location: Cart.java line 50, line 59, line 65, line 68. Problem Desc: the class comparison is not working with the current implementation. Problem type: FD/BR

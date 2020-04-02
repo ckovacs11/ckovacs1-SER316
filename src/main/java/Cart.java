@@ -28,7 +28,7 @@ public class Cart {
      * @throws UnderAgeException
      */
     public double calcCost() throws UnderAgeException {
-        return 0; //implement me, will be important for assignment 4 (nothing to do here for assignment 3)
+        return 10; //implement me, will be important for assignment 4 (nothing to do here for assignment 3)
     }
 
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
@@ -47,7 +47,8 @@ public class Cart {
             subTotal += cart.get(i).getCost();
             costAfterSavings =costAfterSavings+cart.get(i).getCost();
 
-            if (cart.get(i).getClass().toString() == Produce.class.toString()) {
+            if (cart.get(i).getClass() == Produce.class) {
+            	
                 produce_counter++;
 
                 if (produce_counter >= 3) {
@@ -55,16 +56,16 @@ public class Cart {
                     produce_counter = 0;
                 }
             }
-            else if (cart.get(i).getClass().toString()==Alcohol.class.toString()) {
+            else if (cart.get(i).getClass()==Alcohol.class) {
                 alcoholCounter++;
                 if (userAge < 21) {
                     throw new UnderAgeException("The User is not of age to purchase alcohol!");
                 }
             }
-            else if (cart.get(i).getClass().toString() == FrozenFood.class.toString()) {
+            else if (cart.get(i).getClass() == FrozenFood.class) {
                 frozenFoodCounter++;
             }
-            else if (cart.get(i).getClass().toString() == FrozenFood.class.toString())
+            else if (cart.get(i).getClass() == FrozenFood.class)
                 dairyCounter++;
 
             if (alcoholCounter >= 1 && frozenFoodCounter >= 1) {
