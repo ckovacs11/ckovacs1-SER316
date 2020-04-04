@@ -28,7 +28,72 @@ public class Cart {
      * @throws UnderAgeException
      */
     public double calcCost() throws UnderAgeException {
-        return 10; //implement me, will be important for assignment 4 (nothing to do here for assignment 3)
+        double subTotal = 0;
+        int savings = 0;
+        int produce = 0;
+        int produceDealCounter = 0;
+        int alcohol = 0;
+        int frozenFood = 0;
+        int alcFroDealCounter = 0;
+        int dairy = 0;
+        int meat = 0;
+        
+        //count items and get cost before savings
+        for(int i = 0; i < cart.size(); i++) {
+            
+               
+
+                if (cart.get(i).getClass() == Produce.class) {               	
+                    produce++;
+                    subTotal = subTotal + cart.get(i).getCost();
+                    
+                    if((produce % 3) == 0) {
+                    	produceDealCounter++;
+                    }
+                }
+                else if (cart.get(i).getClass()==Alcohol.class) {
+                    alcohol++;
+                    subTotal = subTotal + cart.get(i).getCost();
+                    if (userAge < 21) {
+                        throw new UnderAgeException("The User is not of age to purchase alcohol!");
+                    }
+                }
+                else if (cart.get(i).getClass() == FrozenFood.class) {
+                    frozenFood++;
+                    subTotal = subTotal + cart.get(i).getCost();
+                }
+                else if (cart.get(i).getClass() == FrozenFood.class) {
+                    dairy++;
+                    subTotal = subTotal + cart.get(i).getCost();
+                }
+                else if (cart.get(i).getClass() == Meat.class) {
+                	meat++;
+                	subTotal = subTotal + cart.get(i).getCost();
+                }
+                else if (cart.get(i).getClass() == Dairy.class) {
+                	meat++;
+                	subTotal = subTotal + cart.get(i).getCost();
+                }
+        
+    }
+        
+        subTotal = subTotal - produceDealCounter;
+        
+        //subtract out the alcFroDeal
+        while(alcohol >= 1 && frozenFood >= 1) {
+        	alcFroDealCounter++;
+        	alcohol--;
+        	frozenFood--;
+        }
+        
+        subTotal = subTotal - alcFroDealCounter*3;
+        
+        //add the tax
+        subTotal = subTotal + getTax(subTotal, "AZ");
+        
+        return subTotal;
+        
+        
     }
 
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
@@ -38,7 +103,9 @@ public class Cart {
         int subTotal = 0;
         int costAfterSavings = 0;
 
-        double produce_counter = 0;
+        //all counters should be ints. Changed to int from double
+        int produce_counter = 0;
+        
         int alcoholCounter = 0;
         int frozenFoodCounter = 0;
         int dairyCounter = 0;
@@ -47,6 +114,7 @@ public class Cart {
             subTotal += cart.get(i).getCost();
             costAfterSavings =costAfterSavings+cart.get(i).getCost();
 
+            //changed all of the class comparison statements. They weren't working correctly before.
             if (cart.get(i).getClass() == Produce.class) {
             	
                 produce_counter++;
@@ -65,11 +133,14 @@ public class Cart {
             else if (cart.get(i).getClass() == FrozenFood.class) {
                 frozenFoodCounter++;
             }
-            else if (cart.get(i).getClass() == FrozenFood.class)
+            
+            //DairyCounter simply isn't needed because there are no cost savings for purchasing dairy.
+            else if (cart.get(i).getClass() == Dairy.class)
                 dairyCounter++;
 
             if (alcoholCounter >= 1 && frozenFoodCounter >= 1) {
-                 costAfterSavings = costAfterSavings + 3;
+            	//changed the "costAfterSavings + 3" to "costAfterSavings - 3" because it didn't make sense to add 3.
+                 costAfterSavings = costAfterSavings - 3;
                  alcoholCounter--;
                  frozenFoodCounter--;
             }
@@ -90,6 +161,8 @@ public class Cart {
                 break;
             case "NY":
                 newTotal = totalBT * .1;
+                //needed to insert a break here so it doesn't calculate the Colorado tax
+                break;
             case "CO":
                 newTotal = totalBT * .07;
                 break;
@@ -103,11 +176,13 @@ public class Cart {
       cart.add(np);
     }
 
-    public boolean RemoveItem(Product productToRemove)
+    //changed the method name is lower camelCase
+    public boolean removeItem(Product productToRemove)
     {
     		boolean test = false;
         for (int i = 0; i < cart.size(); i++) {
-            if (cart.get(i) == productToRemove) {
+        	//fixed the if conditional statement to compare the product classes correctly
+            if (cart.get(i).getClass() == productToRemove.getClass()) {
                  cart.remove(i);
                  test = true;
                  return test;

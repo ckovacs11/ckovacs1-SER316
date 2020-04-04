@@ -1,68 +1,19 @@
 package test.java;
 
-import main.java.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Collection;
+import main.java.Alcohol;
+import main.java.Cart;
+import main.java.Dairy;
+import main.java.FrozenFood;
+import main.java.Meat;
+import main.java.Produce;
+import main.java.UnderAgeException;
 
-import static org.junit.Assert.*;
-
-@RunWith(Parameterized.class)
-public class BlackBoxGiven {
-
-    private Class<Cart> classUnderTest;
-
-    @SuppressWarnings("unchecked")
-    public BlackBoxGiven(Object classUnderTest) {
-        this.classUnderTest = (Class<Cart>) classUnderTest;
-    }
-
-    // Define all classes to be tested
-    @Parameterized.Parameters
-    public static Collection<Object[]> cartClassUnderTest() {
-        Object[][] classes = {
-            {Cart0.class},
-            {Cart1.class},
-            {Cart2.class},
-            {Cart3.class},
-            {Cart4.class},
-            {Cart5.class}
-        };
-        return Arrays.asList(classes);
-    }
-
-    private Cart createCart(int age) throws Exception {
-        Constructor<Cart> constructor = classUnderTest.getConstructor(Integer.TYPE);
-        return constructor.newInstance(age);
-    }
-    /**
-     * Calculates the final cost after all savings and tax has been applied. Also checks
-     * that the user is of age to purchase alcohol if it is in their cart at checkout. Sales tax is always AZ tax.
-     *
-     * Calculation is based off of the following prices and deals:
-     * Dairy -> $3
-     * Meat -> $10
-     * Produce -> $2 or 3 for $5
-     * Alcohol -> $8
-     * Frozen Food -> $5
-     * Alcohol + Frozen Food -> $10
-     *      case "AZ":
-                newTotal = totalBT * .08;
-                break;
-            case "CA":
-                newTotal = totalBT * .09;
-                break;
-            case "NY":
-                newTotal = totalBT * .1;
-            case "CO":
-                newTotal = totalBT * .07;
-     */
-    
-
+public class calcCostTest {
+	
     Cart cart1;
     double cart1Expected;
     
@@ -93,7 +44,6 @@ public class BlackBoxGiven {
     Cart cart10;
     double cart10Expected;
 
-
     @org.junit.Before
     public void setUp() throws Exception {
 
@@ -101,28 +51,26 @@ public class BlackBoxGiven {
     	
     	//CART 1
         // cart with a little bit of everything but no edge cases. 3 alcohol, 3 dairy, 4 meat, 4 FF, 2 produce.
-        cart1 = createCart(40);
+        cart1 = new Cart(40);
         for (int i = 0; i < 3; i++) {
             cart1.addItem(new Alcohol());
         }
-        for(int i = 0; i < 3; i++) {
-            cart1.addItem(new Dairy());
-        }
-        for(int i = 0; i < 4; i++) {
-            cart1.addItem(new Meat());
-        }
+
         for(int i = 0; i < 4; i++) {
         	cart1.addItem(new FrozenFood());
         }
         for(int i = 0; i < 2; i++) {
         	cart1.addItem(new Produce());
         }
+        for(int i = 0; i < 7; i++) {
+        	cart1.addItem(new Meat());
+        }
 
-        cart1Expected = 95.04;
+        cart1Expected = 117.72;
         
         //CART 2
         //cart created with an age 15 shopper (same cart as cart1)
-        cart2 = createCart(15);
+        cart2 = new Cart(15);
         for (int i = 0; i < 2; i++) {
             cart2.addItem(new Alcohol());
         }
@@ -138,7 +86,7 @@ public class BlackBoxGiven {
         
       //CART 3  
       //cart created with 2 produce and nothing else
-        cart3 = createCart(25);
+        cart3 = new Cart(25);
         for(int i = 0; i < 2; i++) {
         	cart3.addItem(new Produce());
         }
@@ -147,7 +95,7 @@ public class BlackBoxGiven {
         
       //CART 4
     	//cart created with 6 produce and nothing else
-    	cart4 = createCart(25);
+    	cart4 = new Cart(25);
     	for(int i = 0; i < 6; i++) {
     		cart4.addItem(new Produce());
     	}
@@ -156,7 +104,7 @@ public class BlackBoxGiven {
     	
     	//CART 5
     	//cart created with no alcohol and >1 FF
-    	cart5 = createCart(40);
+    	cart5 = new Cart(40);
     	for(int i = 0; i < 5; i++) {
     		cart5.addItem(new FrozenFood());
     	}
@@ -164,7 +112,7 @@ public class BlackBoxGiven {
     	
     	//CART 6
     	//cart created with no FF and >1 alcohol
-    	cart6 = createCart(40);
+    	cart6 = new Cart(40);
     	for(int i = 0; i < 5; i++) {
     		cart6.addItem(new Alcohol());
     	}
@@ -172,12 +120,12 @@ public class BlackBoxGiven {
     	
     	//CART 7
     	//cart created with zero items
-    	cart7 = createCart(40);
+    	cart7 = new Cart(40);
     	cart7Expected = 0;
     	
     	//CART 8
     	//cart created with only frozen food and alcohol (5 of each). Also 21 y/o
-    	cart8 = createCart(21);
+    	cart8 = new Cart(21);
     	for(int i = 0; i < 5; i++) {
     		cart8.addItem(new Alcohol());
     		cart8.addItem(new FrozenFood());
@@ -186,7 +134,7 @@ public class BlackBoxGiven {
     	
     	//CART 9
     	//4 produce
-    	cart9 = createCart(0);
+    	cart9 = new Cart(0);
     	for(int i = 0; i < 4; i++) {
     		cart9.addItem(new Produce());
     		cart9.addItem(new FrozenFood());
@@ -195,7 +143,7 @@ public class BlackBoxGiven {
     	
     	//CART 10
     	//20 of each item
-    	cart10 = createCart(40);
+    	cart10 = new Cart(40);
     	for(int i = 0; i < 20; i++) {
     		cart10.addItem(new Meat());
     		cart10.addItem(new Produce());
@@ -272,6 +220,6 @@ public class BlackBoxGiven {
     public void calcCostCart10() throws UnderAgeException {
     	double amount = cart10.calcCost();
     	assertEquals(cart10Expected, amount, .01);
-    }
-    
+    }	
+	
 }
