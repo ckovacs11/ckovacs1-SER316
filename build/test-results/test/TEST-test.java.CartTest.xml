@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test.java.CartTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2020-04-14T17:15:17" hostname="DESKTOP-A624P9L" time="0.015">
+  <properties/>
+  <testcase name="removeItem1" classname="test.java.CartTest" time="0.001"/>
+  <testcase name="getTax1" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax2" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax3" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax4" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax5" classname="test.java.CartTest" time="0.001"/>
+  <testcase name="amountSaved1" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved2" classname="test.java.CartTest" time="0.001"/>
+  <testcase name="amountSaved3" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved4" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved5" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved6" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="removeItem1" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax1" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax2" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax3" classname="test.java.CartTest" time="0.001"/>
+  <testcase name="getTax4" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="getTax5" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved1" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved2" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved3" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved4" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved5" classname="test.java.CartTest" time="0.0"/>
+  <testcase name="amountSaved6" classname="test.java.CartTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

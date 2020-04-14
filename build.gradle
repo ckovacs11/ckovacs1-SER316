@@ -5,6 +5,7 @@
 
 apply plugin: 'application'
 apply plugin: 'jacoco'
+apply plugin: 'com.github.spotbugs'
 
 
 mainClassName = 'main.java.Main'
@@ -28,7 +29,7 @@ test {
 /////////////////////////////////////////////////////////////////////
   apply plugin: 'checkstyle'
   checkstyle {
-    // Keep checkstyle a little quieter
+ //   // Keep checkstyle a little quieter
     ignoreFailures = true
     showViolations = false
   }
@@ -40,7 +41,7 @@ test {
     }
   }
   checkstyle {
-      toolVersion = "8.8"
+      toolVersion = "8.3"
   }
 
 
@@ -54,3 +55,7 @@ test {
       html.enabled = true
     }
   }
+
+  spotbugs {
+  toolVersion = '4.0.1'
+}
