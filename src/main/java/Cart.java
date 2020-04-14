@@ -6,8 +6,8 @@ import java.util.List;
 public class Cart {
 
     protected int userAge;
-    public List<Product> cart;
-    public int cartStorage;
+    private List<Product> cart;
+    private int cartStorage;
 
     /**
      * Calculates the final cost after all savings and tax has been applied. Also checks
@@ -28,13 +28,13 @@ public class Cart {
      * @throws UnderAgeException
      */
     public double calcCost() throws UnderAgeException {
-        return 0; //implement me, will be important for assignment 4 (nothing to do here for assignment 3)
+        return 10; //implement me, will be important for assignment 4 (nothing to do here for assignment 3)
     }
 
     // calculates how much was saved in the current shopping cart based on the deals, returns the saved amount
     // throws exception if alcohol is bought from underage person
     // TODO: Create node graph for this method in assign 4: create white box tests and fix the method, reach at least 98% coverage
-    public int Amount_saved() throws UnderAgeException {
+    public int amountSaved() throws UnderAgeException {
         int subTotal = 0;
         int costAfterSavings = 0;
 
@@ -47,7 +47,8 @@ public class Cart {
             subTotal += cart.get(i).getCost();
             costAfterSavings =costAfterSavings+cart.get(i).getCost();
 
-            if (cart.get(i).getClass().toString() == Produce.class.toString()) {
+            if (cart.get(i).getClass() == Produce.class) {
+            	
                 produce_counter++;
 
                 if (produce_counter >= 3) {
@@ -55,16 +56,16 @@ public class Cart {
                     produce_counter = 0;
                 }
             }
-            else if (cart.get(i).getClass().toString()==Alcohol.class.toString()) {
+            else if (cart.get(i).getClass()==Alcohol.class) {
                 alcoholCounter++;
                 if (userAge < 21) {
                     throw new UnderAgeException("The User is not of age to purchase alcohol!");
                 }
             }
-            else if (cart.get(i).getClass().toString() == FrozenFood.class.toString()) {
+            else if (cart.get(i).getClass() == FrozenFood.class) {
                 frozenFoodCounter++;
             }
-            else if (cart.get(i).getClass().toString() == FrozenFood.class.toString())
+            else if (cart.get(i).getClass() == FrozenFood.class)
                 dairyCounter++;
 
             if (alcoholCounter >= 1 && frozenFoodCounter >= 1) {
@@ -78,9 +79,9 @@ public class Cart {
     }
 
     // Gets the tax based on state and the total
-    public double getTax(double totalBT, String twoLetterUSStateAbbreviation) {
+    public double getTax(double totalBT, String state) {
         double newTotal = 0;
-        switch (twoLetterUSStateAbbreviation) {
+        switch (state) {
             case "AZ":
                 newTotal = totalBT * .08;
                 break;
