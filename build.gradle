@@ -51,4 +51,4 @@ dependencies {
       xml.enabled = false
       html.enabled = true
     }
- // }
+  }
